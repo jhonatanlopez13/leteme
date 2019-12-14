@@ -1,6 +1,6 @@
 <?php
 
-class TipoDocDAO{
+class TipodocDAO{
     public $id;
     public $descripcion;
 }
