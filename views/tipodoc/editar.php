@@ -13,8 +13,8 @@
 
     <div id="container" class="container">
         <div><?php echo $this->mensaje; ?></div>
-        <h1 class="center">Nuevo tipodocumento</h1>
-        <form action="<?php echo constant('URL'); ?>tipodoc/crear" method="POST">
+        <h1 class="center">editar tipodocumento</h1>
+        <form action="<?php echo constant('URL'); ?>tipodoc/editar" method="POST">
 
         <div class="row">
 
@@ -22,21 +22,19 @@
      
             <div class="form-group">
                 <label for="id">id</label>
-                <input type="text" class="form-control" name="id" id="id" required>
-                <small id="idHelp" class="form-text text-muted">diligencie el documento de aprendiz</small>
+                <input type="text" class="form-control" readonly name="id" id="id" value="<?php echo $this->tipodoc->id; ?>">
+     
             </div>
             <div class="form-group">
                 <label for="descripcion">descripcion</label>
-                <input type="text" class="form-control" name="descripcion" id="descripcion" required>
+                <input type="text" class="form-control" name="descripcion" id="descripcion" value="<?php echo $this->tipodoc->descripcion; ?>">
                 <small id="descripcionHelp" class="form-text text-muted">diligencie el documento de aprendiz</small>
             </div>
           
          
             </div>
             
-            
-
-            <input type="submit" class="btn btn-primary" value="Crear tipo de documento">
+            <input type="submit" class="btn btn-primary" value="guardar">
         </form>
         </div>
     </div>
