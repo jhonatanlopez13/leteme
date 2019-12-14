@@ -1,40 +1,40 @@
 <?php
-    class Programa extends Controller{
+    class Ficha extends Controller{
         function __construct(){
             parent::__construct();
             $this->view->mensaje="";
         }
 
         function render(){
-            $programas = $this->view->datos = $this->model->read();
-        $this->view->programas = $programas;
-            $this->view->render('programa/index');
+            $fichas = $this->view->datos = $this->model->read();
+        $this->view->fichas = $fichas;
+            $this->view->render('ficha/index');
         }
         function crear(){
-            if(isset($_POST["nombre"])){
+            if(isset($_POST["programa"])){
                 if($this->model->create($_POST)){
                     $this->view->mensaje = "Programa creado correctamente";
-                    $programas = $this->view->datos = $this->model->read();
-                    $this->view->programas = $programas;
-                    $this->view->render('programa/index');
+                    $fichas = $this->view->datos = $this->model->read();
+                    $this->view->fichas = $fichas;
+                    $this->view->render('ficha/index');
                 }else{
                     
                     $this->view->mensaje = "El programa ya existe 1";
-                    $this->view->render('programa/nuevo');
+                    $this->view->render('ficha/nuevo');
                 }
             }else{
-                $this->view->render('programa/nuevo');
+                $this->view->render('ficha/nuevo');
             }
         }
         function leer($param = null){
-            $nroprograma = $param[0];
-            $programa = $this->model->readById($nroprograma);
+            $nroficha = $param[0];
+            $programa = $this->model->readById($nroficha);
     
             session_start();
-            $_SESSION["id_verPrograma"] = $programa->nroprograma;
+            $_SESSION["id_verPrograma"] = $programa->nroficha;
     
-            $this->view->programa = $programa;
-            $this->view->render('programa/editar');
+            $this->view->ficha = $ficha;
+            $this->view->render('ficha/editar');
         }
         function editar($param = null){
             session_start();
@@ -42,22 +42,23 @@
             unset($_SESSION['id_verPrograma']);
     
             if($this->model->update($_POST)){
-                $programa = new ProgramaDAO();
-                $programa->nroprograma = $id;
-                $programa->nroprograma = $_POST['nroprograma'];
-                $programa->nombre = $_POST['nombre'];
-                $programa->descripcion = $_POST['descripcion'];
-                $programa->totalhoras = $_POST['totalhoras'];
+                $ficha = new FichaDAO();
+                $ficha->nroficha = $id;
+                $ficha->nroficha = $_POST['nroficha'];
+                $ficha->programa = $_POST['programa'];
+                $ficha->fecha_ingreso = $_POST['fecha_ingreso'];
+                $ficha->fecha_fin_lectiva = $_POST['fecha_fin_lectiva'];
+                $ficha->fecha_fin_practica = $_POST['fecha_fin_lectiva'];
     
     
-                $this->view->programa = $programa;
+                $this->view->ficha = $ficha;
                 $this->view->mensaje = "Programa actualizado correctamente";
             }else{
                 $this->view->mensaje = "No se pudo actualizar al programa";
             }
             $programas = $this->view->datos = $this->model->read();
             $this->view->programas = $programas;
-            $this->view->render('programa/index');
+            $this->view->render('ficha/index');
         }
         function eliminar($param = null){
             $id = $param[0];
